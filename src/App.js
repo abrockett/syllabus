@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import './slant.css';
 import 'whatwg-fetch';
 import {key} from './Key';
 
@@ -34,26 +33,37 @@ class App extends React.Component {
     const airtable = this.state.airtable;
 
 
-    const entry = airtable.map((airtable, index) =>
-      <tr>
-      <td key={index}>{airtable.fields["Course Name"]}</td>
-      </tr>
-    );
+    // const entry = airtable.map((airtable, index) =>
+    //   <tr>
+    //   <td key={index}>{airtable.fields["Course Name"]}</td>
+    //   </tr>
+    // );
 
-    //const entry = airtable.length > 0 ? airtable[0].fields["Course Name"] : '';
+    const name = airtable.length > 0 ? airtable[0].fields["Course Name"] : '';
+    debugger;
+    const buttonStyles = {
+      color:'white',
+      backgroundColor:'blue',
+      fontWeight:'bold',
+      fontSize:'20px'
+    };
+
     return (
 
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Syllabus Pretty Printer</h2>
         </div>
 
-        <button className="bttn-primary bttn-slant bttn-md"
-        onClick={this.fetchAirtable}>Fetch</button>
-
+        <button style={buttonStyles}
+        onClick={this.fetchAirtable}>Fetch Airtable Record</button>
+        <h2>Idaho State University</h2>
+        <h3>Audiology Program</h3>
         <table>
-        <tbody>{entry ? entry : ''}</tbody>
+        <tr><b>Course Name: </b>{name ? name : ''}</tr>
+        <tr><b>Course Name: </b>{name ? name : ''}</tr>
+        <tr><b>Course Name: </b>{name ? name : ''}</tr>
         </table>
       </div>
     );
