@@ -18,7 +18,10 @@ class App extends React.Component {
       airtable: [],
     };
     this.fetchAirtable = this.fetchAirtable.bind(this);
+  }
 
+  componentWillMount() {
+    this.fetchAirtable();
   }
 
   fetchAirtable() {
@@ -40,30 +43,30 @@ class App extends React.Component {
     // );
 
     const name = airtable.length > 0 ? airtable[0].fields["Course Name"] : '';
-    debugger;
-    const buttonStyles = {
-      color:'white',
-      backgroundColor:'blue',
-      fontWeight:'bold',
-      fontSize:'20px'
-    };
+    const description = airtable.length > 0 ? airtable[0].fields["Course Description"] : '';
+    const credits = airtable.length > 0 ? airtable[0].fields["Course Credits"] : '';
+    const prefix = airtable.length > 0 ? airtable[0].fields["Course Prefix and Number"] : '';
+    const objectives = airtable.length > 0 ? airtable[0].fields["ObjectivesText"] : '';
+    const instructor = airtable.length > 0 ? airtable[0].fields["Course Instructor"] : '';
 
     return (
 
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Syllabus Pretty Printer</h2>
+          <h2>Audiology Department Syllabus Printer</h2>
         </div>
 
-        <button style={buttonStyles}
-        onClick={this.fetchAirtable}>Fetch Airtable Record</button>
-        <h2>Idaho State University</h2>
-        <h3>Audiology Program</h3>
         <table>
-        <tr><b>Course Name: </b>{name ? name : ''}</tr>
-        <tr><b>Course Name: </b>{name ? name : ''}</tr>
-        <tr><b>Course Name: </b>{name ? name : ''}</tr>
+        <thead><tr><th>Course Name: </th><th>{name ? name : ''}</th></tr></thead>
+        <tbody>
+        <tr><td><b>Course Prefix and Number: </b></td><td>{prefix ? prefix : ''}</td></tr>
+        <tr><td><b>Course Description: </b></td><td>{description ? description : ''}</td></tr>
+        <tr><td><b>Course Instructor: </b></td><td>{instructor ? instructor : ''}</td></tr>
+        <tr><td><b>Course Credits: </b></td><td>{credits ? credits : ''}</td></tr>
+        <tr><td><b>Course Objectives: </b></td><td>{objectives ? objectives : ''}</td></tr>
+
+        </tbody>
         </table>
       </div>
     );
